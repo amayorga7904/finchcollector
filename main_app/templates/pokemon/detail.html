@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Finch Pokedex</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ pokemon.name }}</span>
+    <p>Type: {{ pokemon.type }}</p>
+    <p>Height (m): {{ pokemon.height }}</p>
+    <p>Weight (kg): {{ pokemon.weight }}</p>
+    <p>Level: {{ pokemon.level }}</p>
+    <p>Description: {{ pokemon.description|linebreaks }}</p>
+    {% if pokemon.age > 0 %}
+      <p>Age: {{ pokemon.age }}</p>
+    {% else %}
+      <p>Age: unknown</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
