@@ -51,4 +51,4 @@ class Move(models.Model):
     )
 
     def __str__(self):
-        return f'{self.get_move_type_display()} on {self.move_name}'
+        return f'{self.move_name} is {self.get_move_type_display()}'
