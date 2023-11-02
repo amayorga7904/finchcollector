@@ -20,8 +20,10 @@ def pokemons_index(request):
 
 def pokemon_detail(request, pokemon_id):
   pokemon = Pokemon.objects.get(id=pokemon_id)
+  move_form = MoveForm()
   return render(request, 'pokemon/detail.html', {
-    'pokemon': pokemon
+    'pokemon': pokemon,
+    'move_form': move_form
   })
 
 class PokemonCreate(CreateView):
