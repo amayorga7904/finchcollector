@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Pokemon
+from .forms import MoveForm
+
 # Create your views here.
 
 
@@ -33,3 +35,11 @@ class PokemonUpdate(UpdateView):
 class PokemonDelete(DeleteView):
   model = Pokemon
   success_url = '/pokemon' 
+
+def add_move(request, pokemon_id):
+  form = MoveForm(request.POST)
+  if form.is_valid():
+    new_move = form.save(commit=False)
+    new_move.pokemon_id = pokemon_id
+    new_move.save()
+  return redirect('detail', pokemon_id=pokemon_id)

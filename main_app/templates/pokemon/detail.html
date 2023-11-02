@@ -26,6 +26,11 @@
   </div>
 </div>
 <div class="col s6">
+  <form method="POST">
+    {% csrf_token %}
+    {{ move_form.as_p }}
+    <input type="submit" class="btn" value="Learn a New Move">
+  </form>
   <table class="striped">
     <thead>
       <tr><th>Move</th><th>Type</th></tr>
