@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Are You Sure?</h1>
+
+  <h4>You don't want to keep <span class="teal-text">{{ object.name }} </span>against its will?</h4>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Set Free!" class="btn">
+    <a href="{% url 'detail' pokemon.id %}">Nevermind</a>
+  </form>
+{% endblock %}
