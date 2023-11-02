@@ -38,14 +38,17 @@ class Pokemon(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pokemon_id': self.id})  
     
-# class Move(models.Model):
-#     move_name = models.CharField()
-#     move_type = models.CharField(
-#         max_length=3,
-#         choices=TYPES
-#     )
+class Move(models.Model):
+    move_name = models.CharField()
+    move_type = models.CharField(
+        max_length=3,
+        choices=TYPES
+    )
 
-#     pokemon = models.ForeignKey(
-#         Pokemon,
-#         on_delete=models.CASCADE
-#     )
+    pokemon = models.ForeignKey(
+        Pokemon,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f'{self.get_move_type_display()} on {self.move_name}'
