@@ -35,7 +35,7 @@ def pokemon_detail(request, pokemon_id):
 
 class PokemonCreate(CreateView):
   model = Pokemon
-  fields = '__all__'
+  fields = ['name', 'type', 'height', 'weight', 'level', 'description', 'age']
 
 class PokemonUpdate(UpdateView):
   model = Pokemon
