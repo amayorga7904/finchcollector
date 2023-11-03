@@ -13,4 +13,8 @@ urlpatterns = [
     path('vapes/', views.VapeList.as_view(), name='vapes_index'),
     path('vapes/<int:pk>/', views.VapeDetail.as_view(), name='vapes_detail'),
     path('vapes/create/', views.VapeCreate.as_view(), name='vapes_create'),
+
+    # associate a toy with a cat (M:M)
+    path('pokemon/<int:pokemon_id>/assoc_vape/<int:vape_id>/', views.assoc_vape, name='assoc_vape'),
+    path('pokemon/<int:pokemon_id>/unassoc_vape/<int:vape_id>/', views.unassoc_vape, name='unassoc_vape'),
 ]

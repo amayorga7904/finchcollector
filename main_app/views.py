@@ -21,10 +21,13 @@ def pokemons_index(request):
 
 def pokemon_detail(request, pokemon_id):
   pokemon = Pokemon.objects.get(id=pokemon_id)
+  id_list = pokemon.vapes.all().values_list('id')
+  vapes_pokemon_doesnt_have = Vape.objects.exclude(id__in=id_list)
   move_form = MoveForm()
   return render(request, 'pokemon/detail.html', {
     'pokemon': pokemon,
-    'move_form': move_form
+    'move_form': move_form,
+    'vapes': vapes_pokemon_doesnt_have
   })
 
 class PokemonCreate(CreateView):
@@ -56,3 +59,12 @@ class VapeDetail(DetailView):
 class VapeCreate(CreateView):
   model = Vape
   fields = '__all__'
+
+def assoc_vape(request, pokemon_id, vape_id):
+  # Note that you can pass a toy's id instead of the whole toy object
+  Pokemon.objects.get(id=pokemon_id).vapes.add(vape_id)
+  return redirect('detail', pokemon_id=pokemon_id)
+
+def unassoc_vape(request, pokemon_id, vape_id):
+  Pokemon.objects.get(id=pokemon_id).vapes.remove(vape_id)
+  return redirect('detail', pokemon_id=pokemon_id)

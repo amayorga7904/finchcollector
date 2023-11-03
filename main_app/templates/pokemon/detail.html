@@ -45,16 +45,56 @@
     </tbody>
   </table>
 </div>
+  <hr>
+  <div class="row">
+    <div class="col s6">
+      <h3>{{ pokemon.name }}'s Vapes</h3>
+      {% if pokemon.vapes.count %}
+        {% for vape in pokemon.vapes.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                A <span style="flavor: {{ vape.flavor }}">{{ vape.flavor }}</span> {{ vape.brand }}
+              </span>
+              <div class="card-action">
+                <form action="{% url 'unassoc_vape' pokemon.id vape.id %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="btn">Remove</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>No Vapes</h5>
+      {% endif %}
+    </div>
+    <!-- New Markup Below -->
+  <div class="col s6">
+    <h3>Available Vapes</h3>
+    {% if vapes.count %}
+      {% for vape in vapes.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              A <span style="flavor: {{ vape.flavor }}">{{ vape.flavor }}</span> {{ vape.brand }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_vape' pokemon.id vape.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{pokemon.name}} Already Has All Vapes Available</h5>
+    {% endif %}
+  </div>
+</div>
 <script>
-const selectEl = document.getElementById('id_move');
-
-// Add a default option before initializing the Materialize Select component
-const defaultOption = document.createElement('option');
-defaultOption.value = 'WTR'; // Set the value of the default option if needed
-defaultOption.text = 'Select a Move'; // Set the text for the default option
-selectEl.appendChild(defaultOption);
-
-// Initialize Materialize Select component
+const selectEl = document.getElementById('id_move_type');
 M.FormSelect.init(selectEl);
 </script>
 {% endblock %}
