@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Vape List</h1>
+
+{% for vape in vape_list %}
+  <a href="{% url 'vapes_detail' vape.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ vape.brand }}</span>
+            <p>Color: {{ vape.flavor }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

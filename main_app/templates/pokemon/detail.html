@@ -46,7 +46,15 @@
   </table>
 </div>
 <script>
-  const selectEl = document.getElementById('id_move');
-  M.FormSelect.init(selectEl);
+const selectEl = document.getElementById('id_move');
+
+// Add a default option before initializing the Materialize Select component
+const defaultOption = document.createElement('option');
+defaultOption.value = 'WTR'; // Set the value of the default option if needed
+defaultOption.text = 'Select a Move'; // Set the text for the default option
+selectEl.appendChild(defaultOption);
+
+// Initialize Materialize Select component
+M.FormSelect.init(selectEl);
 </script>
 {% endblock %}

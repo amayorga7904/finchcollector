@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Pokemon
+from django.views.generic import ListView, DetailView
+from .models import Pokemon, Vape
 from .forms import MoveForm
 
 # Create your views here.
@@ -45,3 +46,13 @@ def add_move(request, pokemon_id):
     new_move.pokemon_id = pokemon_id
     new_move.save()
   return redirect('detail', pokemon_id=pokemon_id)
+
+class VapeList(ListView):
+  model = Vape
+
+class VapeDetail(DetailView):
+  model = Vape
+
+class VapeCreate(CreateView):
+  model = Vape
+  fields = '__all__'

@@ -23,6 +23,16 @@ TYPES = (
 )
 
 # Create your models here.
+class Vape(models.Model):
+    brand = models.CharField(max_length=50)
+    flavor = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('vapes_detail', kwargs={'pk': self.id})
+
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
@@ -31,6 +41,7 @@ class Pokemon(models.Model):
     level = models.IntegerField()
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    vapes = models.ManyToManyField(Vape)
 
     def __str__(self):
         return f'{self.name} ({self.id})'  
@@ -42,7 +53,8 @@ class Move(models.Model):
     move_name = models.CharField()
     move_type = models.CharField(
         max_length=3,
-        choices=TYPES
+        choices=TYPES,
+        default=TYPES[12][0]
     )
 
     pokemon = models.ForeignKey(
